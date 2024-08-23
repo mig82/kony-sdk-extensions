@@ -97,18 +97,16 @@
 		}
 	}
 	
+
 	  function  _goBackTo(friendlyName, context){
 	    let index = history.lastIndexOf(friendlyName);
 	    if(index>=0){
-	      let startIndex = index+1;
-	      if(startIndex<history.length){
-	        history.splice(startIndex);
-	      }
-	      (new kony.mvc.Navigation(friendlyName)).navigate(context);
-	      kony.print("router.history="+JSON.stringify(history));
+	        history.splice(index);
 	    }else{
 	      kony.print(`_backTo.${friendlyName} is not found.`);
 	    }
+	    kony.print("router.history="+JSON.stringify(history));
+	    (new kony.mvc.Navigation(friendlyName)).navigate(context);
 	  }
 
 	return {
