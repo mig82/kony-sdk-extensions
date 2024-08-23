@@ -97,16 +97,19 @@
 		}
 	}
 	
-  	function  _goBackTo(friendlyName, context){
-	  let index = history.lastIndexOf(friendlyName);
-	  if(index>=0){
-	     history.splice(index);
-	     (new kony.mvc.Navigation(friendlyName)).navigate(context);
-             kony.print("router.history="+JSON.stringify(history));
-	  }else{
-	     kony.print(`_backTo.${friendlyName} is not found.`);
+	  function  _goBackTo(friendlyName, context){
+	    let index = history.lastIndexOf(friendlyName);
+	    if(index>=0){
+	      let startIndex = index+1;
+	      if(startIndex<history.length){
+	        history.splice(startIndex);
+	      }
+	      (new kony.mvc.Navigation(friendlyName)).navigate(context);
+	      kony.print("router.history="+JSON.stringify(history));
+	    }else{
+	      kony.print(`_backTo.${friendlyName} is not found.`);
+	    }
 	  }
-	}
 
 	return {
 		init: _init,
