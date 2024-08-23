@@ -96,6 +96,18 @@
 			}
 		}
 	}
+	
+
+	  function  _goBackTo(friendlyName, context){
+	    let index = history.lastIndexOf(friendlyName);
+	    if(index>=0){
+	        history.splice(index);
+	    }else{
+	      kony.print(`_backTo.${friendlyName} is not found.`);
+	    }
+	    kony.print("router.history="+JSON.stringify(history));
+	    (new kony.mvc.Navigation(friendlyName)).navigate(context);
+	  }
 
 	return {
 		init: _init,
@@ -105,6 +117,7 @@
 		setCurrent: _setCurrent,
 		goBack: _goBack,
 		goHome: _goHome,
-		getHistory : _getHistory
+		getHistory : _getHistory,
+		goBackTo: _goBackTo
 	};
 });
